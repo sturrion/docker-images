@@ -6,7 +6,7 @@ RUN microdnf install -y python3 tar gzip && \
     microdnf clean all && \
     curl -sSL https://bootstrap.pypa.io/get-pip.py | python3 && \
     pip3 install --no-cache-dir --upgrade setuptools && \
-    pip3 install --no-cache-dir pandas numpy jupyter yfinance && \
+    pip3 install --no-cache-dir pandas numpy yfinance && \
     python3 -m pip cache purge
 
 CMD ["python3"]
