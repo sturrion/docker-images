@@ -19,7 +19,7 @@ RUN microdnf install -y postgresql16-server && \
 RUN mkdir -p /var/lib/pgsql/16/data && \
     chown -R postgres:postgres /var/lib/pgsql/16/data
 
-# Usar el usuario 'postgres' para ejecutar el proceso
+# Use the 'postgres' user to run the process
 USER postgres
 
 # Expose PostgreSQL port
