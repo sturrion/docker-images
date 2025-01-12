@@ -25,8 +25,18 @@ USER postgres
 # Expose PostgreSQL port
 EXPOSE 5432
 
-RUN /usr/pgsql-16/bin/initdb -D /var/lib/pgsql/16/data && \
-    /usr/pgsql-16/bin/pg_ctl start -D /var/lib/pgsql/16/data 
+# Initialize the PostgreSQL database
+#RUN /usr/pgsql-16/bin/initdb -D /var/lib/pgsql/16/data && \
+#    /usr/pgsql-16/bin/pg_ctl start -D /var/lib/pgsql/16/data 
+RUN /usr/pgsql-16/bin/initdb -D /var/lib/pgsql/16/data
 
+# Modify postgresql.conf to listen on all IPs
+RUN echo "listen_addresses = '*'" >> /var/lib/pgsql/16/data/postgresql.conf
+
+# Modify pg_hba.conf to allow connections from anywhere
+# RUN echo "host    all             all             0.0.0.0/0            md5" >> /var/lib/pgsql/16/data/pg_hba.conf
+RUN echo "host    all             all             172.18.0.0/16            md5" >> /var/lib/pgsql/16/data/pg_hba.conf
+
+
+# Start PostgreSQL
 CMD ["/usr/pgsql-16/bin/postgres", "-D", "/var/lib/pgsql/16/data"]
-
