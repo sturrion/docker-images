@@ -26,7 +26,7 @@ USER postgres
 EXPOSE 5432
 
 # Initialize the PostgreSQL database
-RUN /usr/pgsql-16/bin/initdb -D /var/lib/pgsql/16/data
+RUN /usr/pgsql-16/bin/initdb -D /var/lib/pgsql/16/data --encoding=UTF8
 
 # Modify postgresql.conf to listen on all IPs
 RUN echo "listen_addresses = '*'" >> /var/lib/pgsql/16/data/postgresql.conf
